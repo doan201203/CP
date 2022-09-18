@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "*.c": "c",
+        "*.js": "javascript",
+        "*.py": "python",
+        "iostream": "cpp",
+        "deque": "cpp",
+        "forward_list": "cpp",
+        "list": "cpp",
+        "string": "cpp",
+        "vector": "cpp",
+        "system_error": "cpp",
+        "array": "cpp",
+        "regex": "cpp"
+    }
+}
