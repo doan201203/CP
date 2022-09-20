@@ -14,38 +14,42 @@ template <typename T> using oset = tree<T, null_type, less<T>, rb_tree_tag, tree
 #define pb push_back
 #define all(c) (c).begin(), (c).end()
 #define sz(x) (int)(x).size()
-
+const ll mod = 998244353;
 void Solve()
 {
-    int n;
-    cin >> n;
-    vector<int> a(n);
-    for(int &i : a) cin >> i;
-    sort(all(a));
-    int cnt = 0;
-    for(int i = 0 ; i < n - 1 ; i++)
+    set<ll> r , c;
+    ll n , m , k , q;
+    cin >> n >> m >> k >> q;
+    vector<pair<ll , ll>> pos(q);
+    for(int i = 0 ; i < q ; i++)
     {
-        if(a[i] + 1 < a[i + 1])
+        cin >> pos[i].first >> pos[i].second;
+    }
+    reverse(all(pos));
+    ll ans = 1;
+
+    for(int i = 0 ; i < q ; i++)
+    {
+        if(r.size() == n || c.size() == m)
         {
-            a[i + 1] = a[i] + 1;
-            ++cnt; 
+            break;
+        }
+        if(r.empty() && c.empty())
+        {
+            ans *= k;
+            ans %= mod;
+            r.insert(pos[i].first);
+            c.insert(pos[i].second);
+        }
+        else if(r.find(pos[i].first) == r.end() || c.find(pos[i].second) == c.end())
+        {
+            ans *= k;
+            ans %= mod;
+            r.insert(pos[i].first);
+            c.insert(pos[i].second);
         }
     }
-    if(n == 1)
-    {
-        if(a[0] != 1)
-        {
-            cout << "TUAN";
-        }
-        else cout << "CPU";
-        return;
-    }
-    // cout << "CNT : " << cnt << '\n';
-    if(cnt&1)
-    {
-        cout << "TUAN";
-    }
-    else cout << "CPU";
+    cout << ans << '\n';
 }
 
 int main()
@@ -55,7 +59,7 @@ int main()
     cin.tie(NULL);
 
     int truongdoan = 1;
-    //cin >> truongdoan;
+    cin >> truongdoan;
 
     while(truongdoan-->0)
     {

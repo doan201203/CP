@@ -15,7 +15,9 @@ class Date
         void inc_day(int k);
         int distance(const Date &b);
         bool checkYear();
+        bool valid();
 };
+
 int Date :: getDay()
 {
     return day;
@@ -31,16 +33,9 @@ int Date :: getYear()
     return year;
 }
 
-void Date :: nhap()
+bool Date :: valid()
 {
-    cout << "Nhap ngay , thang , nam : ";
-    cin >> day >> month >> year;
-    while(day <= 0 || month <= 0 || year <= 0 || month > 12 || day > 31)
-    {
-        cout << "nhap lai ngay , thang ,  nam : ";
-        cin >> day >> month >> year;
-    }
-
+    if(day <= 0 || month <= 0 || year <= 0 || month > 12 || day > 31) return false;
     bool leap = checkYear();
     switch (month)
     {
@@ -48,34 +43,35 @@ void Date :: nhap()
         case 6:
         case 9:
         case 11:
-            while(day >= 31)
-            {
-                cout << "Ngay khong hop le , nhap lai ngay : ";
-                cin >> day;
-            }
+            if(day > 30) return false;
             break;
         
         case 2:
             if(leap)
             {
-                while(day > 29)
-                {
-                    cout << "Ngay khong hop le , nhap lai ngay : ";
-                    cin >> day;
-                }
+                if(day > 29) return false;
             }
             else
             {
-                while(day > 28)
-                {
-                    cout << "Ngay khong hop le , nhap lai ngay : ";
-                    cin >> day;
-                }
+                if(day > 28) return false;
             }
             break;
         default:
             break;
     }
+    return true;
+}
+
+void Date :: nhap()
+{
+    cout << "Nhap ngay , thang , nam : ";
+    cin >> day >> month >> year;
+    while(!valid())
+    {
+        cout << "nhap lai ngay , thang ,  nam : ";
+        cin >> day >> month >> year;
+    }
+    
 }
 
 void Date :: xuat()
