@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "*.c": "c",
+        "*.js": "javascript",
+        "*.py": "python",
+        "iostream": "cpp",
+        "limits": "cpp",
+        "*.tcc": "cpp",
+        "array": "cpp"
+    }
+}
