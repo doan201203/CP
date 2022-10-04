@@ -4,12 +4,12 @@ using namespace std;
 class Array
 {
     private:
-        int n;
+        int n = 0;
         int *a;
     public:
         void nhap();
         void xuat();
-        void sum(const Array &b);
+        Array sum(const Array &b);
 };
 
 void Array :: nhap()
@@ -31,25 +31,25 @@ void Array :: xuat()
     cout << '\n';
 }
 
-void Array :: sum(const Array& b)
+Array Array :: sum(const Array& b)
 {
-    if(this -> n != b.n)
-    {
-        cout << "Khong the cong 2 mang khac kich thuoc !\n";
-        return;
-    }
+    Array c;
+    c.n = n;
+    c.a = new int[n];
 
     for(int i = 0 ; i < this -> n ; i++)
     {
-        a[i] = a[i] + b.a[i];
-    }
+        c.a[i] = a[i] + b.a[i];
+    }  
+    
+    return c;
 }
 
 int main()
 {
-    Array a, b;
+    Array a, b , c;
     a.nhap();
     b.nhap();
-    a.sum(b);
-    a.xuat();
+    c = a.sum(b);
+    c.xuat();
 }

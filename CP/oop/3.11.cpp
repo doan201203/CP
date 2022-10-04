@@ -9,17 +9,23 @@ class String
     public:
         int getLen();
         String();
+        String(int n);
         String(int n , char _a[]);
         String(char _a[]);
         void nhap();
         void xuat();
-        void merger(const String &b);
+        String merger(const String &b);
         char character(int i);
 };
 String :: String()
 {
     this -> n = 0;
-    memset(this -> a , '\0' , sizeof this -> a);
+}
+
+String :: String(int n)
+{
+    this -> n = n;
+    for(int i = 0 ; i < n ; i++) a[i] = '\0';
 }
 
 String :: String(char _a[])
@@ -65,14 +71,16 @@ void String :: xuat()
     cout << this -> a << endl;
 }
 
-void String :: merger(const String &b)
+String String :: merger(const String &b)
 {
+    String c(n , this -> a);
     int lenb = b.n;
     for(int i = 0 ; i < lenb ; i++)
     {
-        this -> a[this -> n + i] = b.a[i];
+        c.a[i + n] = b.a[i]; 
     }
-    this -> a[this -> n + lenb] = '\0';
+    c.a[this -> n + lenb] = '\0';
+    return c;
 }
 
 int main()
@@ -81,6 +89,6 @@ int main()
     s.nhap();
     v.nhap();
     cout << s.character(4) << '\n';
-    s.merger(v);
+    s = s.merger(v);
     s.xuat();
 }
